@@ -94,8 +94,6 @@ public enum Type: Int {
 // MARK: - JSON Base
 public struct JSON {
     
-    public var isFromDenner: Bool { return true }
-
     /**
      Creates a JSON using the data.
 
@@ -908,6 +906,12 @@ extension JSON {
     public var number: NSNumber? {
         get {
             switch self.type {
+            case .string:
+                let decimal = NSDecimalNumber(string: self.object as? String)
+                if decimal == NSDecimalNumber.notANumber {  // indicates parse error
+                    return nil
+                }
+                return decimal
             case .number:
                 return self.rawNumber
             case .bool:
