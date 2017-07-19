@@ -93,6 +93,8 @@ public enum Type: Int {
 
 // MARK: - JSON Base
 public struct JSON {
+    
+    var isFromDenner: Bool { return true }
 
     /**
      Creates a JSON using the data.
